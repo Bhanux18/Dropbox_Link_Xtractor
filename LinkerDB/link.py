@@ -19,34 +19,6 @@ st.set_page_config(
                 initial_sidebar_state="expanded")
 
 
-# Step 1: Inject JavaScript to detect browser and store it in localStorage
-components.html("""
-<script>
-  const browser = navigator.userAgent.includes("Chrome") ? "Chrome" : "Other";
-  window.localStorage.setItem("browserType", browser);
-</script>
-""", height=0)
-
-# Step 2: Create a hidden input to receive browser type
-browser_type = st.text_input("Browser Type", value="", label_visibility="hidden")
-
-# Step 3: Use JavaScript to populate the hidden input
-components.html(f"""
-<script>
-  const browser = window.localStorage.getItem("browserType");
-  const input = window.parent.document.querySelector('input[type="text"][aria-label="Browser Type"]');
-  if (input) {{
-    input.value = browser;
-    input.dispatchEvent(new Event('input', {{ bubbles: true }}));
-  }}
-</script>
-""", height=0)
-
-# Step 4: Block Chrome users
-if browser_type == "Chrome":
-    st.error("🚫 This app is not supported in Google Chrome. Please use Firefox, Edge, or Safari.")
-    st.stop()
-
 
 
 
@@ -127,3 +99,4 @@ if btn:
             except Exception as e:
                 st.error(f"❌ Unexpected error: {e}")
                 st.info("💡 Arey, yaar Use Common Sense, Simple sa kaam 😁😅!")
+
