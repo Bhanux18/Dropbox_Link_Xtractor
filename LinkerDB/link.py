@@ -19,32 +19,38 @@ st.set_page_config(
                 initial_sidebar_state="expanded")
 
 
-# --- 🚫 Block Chrome browsers ---
-components.html("""
+hide_chrome_js = """
 <script>
-(function() {
-    let ua = navigator.userAgent;
-    // Detect Chrome but exclude Edge (Edg) and Opera (OPR)
-    if (ua.includes("Chrome") && !ua.includes("Edg") && !ua.includes("OPR")) {
-        document.body.style.backgroundColor = "white";
-        document.body.innerHTML = `
-            <div style="
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                height:100vh;
-                font-family:Arial, sans-serif;
-                color:#d00;
-                font-size:24px;
-                font-weight:bold;
-            ">
-                🚫 Please choose another browser
-            </div>
-        `;
+function blockChrome() {
+    const ua = navigator.userAgent;
+    const isChrome = ua.includes("Chrome") && !ua.includes("Edg") && !ua.includes("OPR");
+    if (isChrome) {
+        // Wipe Streamlit content after load
+        setTimeout(() => {
+            document.body.innerHTML = `
+                <div style="
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    height:100vh;
+                    background:white;
+                    color:#d00;
+                    font-family:Arial, sans-serif;
+                    font-size:26px;
+                    font-weight:bold;
+                    text-align:center;
+                ">
+                    🚫 Please choose another browser
+                </div>`;
+        }, 800);
     }
-})();
+}
+window.addEventListener('load', blockChrome);
 </script>
-""", height=0)
+"""
+
+# Inject the script
+components.html(hide_chrome_js, height=0)
 
 
 
@@ -125,6 +131,7 @@ if btn:
             except Exception as e:
                 st.error(f"❌ Unexpected error: {e}")
                 st.info("💡 Arey, yaar Use Common Sense, Simple sa kaam 😁😅!")
+
 
 
 
