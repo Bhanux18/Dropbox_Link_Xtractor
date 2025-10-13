@@ -8,8 +8,6 @@ from yaml.loader import SafeLoader
 import time
 
 
-import streamlit as st
-import streamlit.components.v1 as components
 
 
 st.set_page_config(   
@@ -99,4 +97,5 @@ if btn:
             except Exception as e:
                 st.error(f"❌ Unexpected error: {e}")
                 st.info("💡 Arey, yaar Use Common Sense, Simple sa kaam 😁😅!")
+
 
