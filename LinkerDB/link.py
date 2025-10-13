@@ -19,23 +19,33 @@ st.set_page_config(
                 initial_sidebar_state="expanded")
 
 
-
-# Inject JS to detect browser
+# --- 🚫 Block Chrome browsers ---
 components.html("""
 <script>
-function detectBrowser() {
-    let userAgent = navigator.userAgent;
-    if (userAgent.includes("Chrome") && !userAgent.includes("Edg") && !userAgent.includes("OPR")) {
+(function() {
+    let ua = navigator.userAgent;
+    // Detect Chrome but exclude Edge (Edg) and Opera (OPR)
+    if (ua.includes("Chrome") && !ua.includes("Edg") && !ua.includes("OPR")) {
+        document.body.style.backgroundColor = "white";
         document.body.innerHTML = `
-            <div style='text-align:center; font-family:Arial; margin-top:100px;'>
-                <h2>🚫 This app does not support Google Chrome.</h2>
-                <p>Please use Firefox, Edge, Safari, or another browser.</p>
-            </div>`;
+            <div style="
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                height:100vh;
+                font-family:Arial, sans-serif;
+                color:#d00;
+                font-size:24px;
+                font-weight:bold;
+            ">
+                🚫 Please choose another browser
+            </div>
+        `;
     }
-}
-detectBrowser();
+})();
 </script>
 """, height=0)
+
 
 
 # 📘 Sidebar Instructions
@@ -115,6 +125,7 @@ if btn:
             except Exception as e:
                 st.error(f"❌ Unexpected error: {e}")
                 st.info("💡 Arey, yaar Use Common Sense, Simple sa kaam 😁😅!")
+
 
 
 
