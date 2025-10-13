@@ -7,6 +7,8 @@ import yaml
 from yaml.loader import SafeLoader
 import time
 
+import streamlit as st
+import streamlit.components.v1 as components
 
 
 
@@ -18,6 +20,22 @@ st.set_page_config(
 
 
 
+# Inject JS to detect browser
+components.html("""
+<script>
+function detectBrowser() {
+    let userAgent = navigator.userAgent;
+    if (userAgent.includes("Chrome") && !userAgent.includes("Edg") && !userAgent.includes("OPR")) {
+        document.body.innerHTML = `
+            <div style='text-align:center; font-family:Arial; margin-top:100px;'>
+                <h2>🚫 This app does not support Google Chrome.</h2>
+                <p>Please use Firefox, Edge, Safari, or another browser.</p>
+            </div>`;
+    }
+}
+detectBrowser();
+</script>
+""", height=0)
 
 
 # 📘 Sidebar Instructions
@@ -97,5 +115,6 @@ if btn:
             except Exception as e:
                 st.error(f"❌ Unexpected error: {e}")
                 st.info("💡 Arey, yaar Use Common Sense, Simple sa kaam 😁😅!")
+
 
 
