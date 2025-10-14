@@ -1,2 +1,11 @@
 [ui]
-hideMenuBar = true
+hideMenuBar = true         # Hides the top-right menu
+hideTopBar = true          # Hides the top header (if applicable)
+theme = "dark"             # Options: "light", "dark", or "auto"
+
+[server]
+headless = true            # Useful for deployment
+enableCORS = false         # If embedding in an iframe
+
+[browser]
+gatherUsageStats = false   # Disable telemetry
