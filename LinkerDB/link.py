@@ -89,7 +89,7 @@ try:
     SECURE_LOGIC_AVAILABLE = True
 except ImportError:
     SECURE_LOGIC_AVAILABLE = False
-ACCESS_TOKEN=ACCESS_TOKEN+"1"
+
 if btn:
     if not ACCESS_TOKEN or not FOLDER_PATH:
         st.warning("⚠️ Please provide both the API key and folder path.")
@@ -131,6 +131,7 @@ if btn:
             except Exception as e:
                 st.error(f"❌ Unexpected error: {e}")
                 st.info("💡 Arey, yaar Use Common Sense, Simple sa kaam 😁😅!")
+
 
 
 
