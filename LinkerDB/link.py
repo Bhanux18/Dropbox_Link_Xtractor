@@ -80,7 +80,7 @@ ACCESS_TOKEN = st.text_area("🔐 Feed your :red[**Dropbox**] API Key Here !:", 
 FOLDER_PATH = st.text_input("📂 Enter your :red[**Dropbox**] Folder path Here !:", placeholder="/MainFolder")
 
 # 🧃 File Type Filter
-ACCESS_TOKEN=ACCESS_TOKEN+"1"
+ACCESS_TOKEN=ACCESS_TOKEN
 
 btn = st.button("🚀 Generate Dropbox Links")
 
@@ -131,6 +131,7 @@ if btn:
             except Exception as e:
                 st.error(f"❌ Unexpected error: {e}")
                 st.info("💡 Arey, yaar Use Common Sense, Simple sa kaam 😁😅!")
+
 
 
 
